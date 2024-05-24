@@ -30,9 +30,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "mock/**/*.ts",
-    "types/ResponseResult.d.ts"
+    "types/ResponseResult.d.ts",
+    "types/**/*.d.ts"
   ],
-  "references": [
-    { "path": "./tsconfig.node.json" }
-  ]
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

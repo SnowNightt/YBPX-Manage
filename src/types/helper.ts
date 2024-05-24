@@ -1,14 +1,15 @@
-import _ from "lodash";
+import _ from 'lodash';
+// 设置环境变量中值的类型，不然都是string类型
 class helper {
-  public env: Record<string, any>;
+  public env: Record<string, unknown>;
   constructor() {
     this.env = this.getEnv();
   }
   private getEnv(): ImportMetaEnv {
     const envs: ImportMetaEnv = _.cloneDeep(import.meta.env);
     Object.entries(envs).forEach(([key, value]) => {
-      if (value == "true" || value == "false") {
-        envs[key] = value == "true";
+      if (value == 'true' || value == 'false') {
+        envs[key] = value == 'true';
       } else if (/^\d+$/.test(value)) {
         envs[key] = parseInt(value);
       } else if (value == null) {

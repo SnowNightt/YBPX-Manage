@@ -1,8 +1,20 @@
 /* eslint-env node */
-require('@rushstack/eslint-patch/modern-module-resolution')
+require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
+  ignorePatterns: [
+    'dist',
+    'node_modules',
+    'public',
+    '.husky',
+    '.vscode',
+    '.idea',
+    '*.sh',
+    '*.md',
+    '.prettierrc.json',
+    '.stylelintrc.cjs'
+  ],
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
@@ -16,7 +28,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.ts', '*.tsx', '*.vue'],
+      files: ['**/*.ts', '**/*.tsx', '**/*.vue'],
       rules: {
         // 解决 ts 全局类型定义后，eslint报错的问题
         'no-undef': 'off'
@@ -81,6 +93,8 @@ module.exports = {
           caseInsensitive: true
         }
       }
-    ]
+    ],
+    '@typescript-eslint/no-explicit-any': 'off',
+    'vue/multi-word-component-names': 'error'
   }
-}
+};
