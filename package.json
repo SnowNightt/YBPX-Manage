@@ -36,14 +36,15 @@
     ]
   },
   "dependencies": {
-    "@vee-validate/i18n": "^4.12.8",
-    "@vee-validate/rules": "^4.12.8",
+    "@vee-validate/i18n": "4.5.10",
+    "@vee-validate/rules": "4.5.10",
     "axios": "^1.6.8",
     "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
-    "vee-validate": "^4.5.8",
+    "vee-validate": "4.5.8",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "yup": "0.32.11"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
