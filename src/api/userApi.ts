@@ -1,12 +1,17 @@
-import { http } from "@/plugins/axios";
+import { http } from '@/plugins/axios';
 
-interface User{
-    name:string
+interface LoginToken {
+  token: string;
 }
-async function getUser() {
-  return http.request<User>({
-    url: "/user",
-    method: "get",
+interface LoginData {
+  account: string;
+  password: string;
+}
+async function getLogin(data: LoginData) {
+  return http.request<LoginToken>({
+    url: '/login',
+    method: 'post',
+    data
   });
 }
-export { getUser };
+export { getLogin };
