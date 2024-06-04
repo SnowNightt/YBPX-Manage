@@ -8,19 +8,30 @@
         <div class="title">
           <h3>用户登陆</h3>
         </div>
-        <div class="user-input">
-          <div class="username">
-            <span>用户名:</span>
-            <input class="input" type="text" placeholder="请输入用户名" />
+        <form @submit="onSubmit">
+          <div class="user-input">
+            <div class="username">
+              <span>用户名:</span>
+              <input class="input" type="text" placeholder="请输入用户名" v-model="accountValue" />
+              <div class="error" v-show="errors.account">*请输入手机号或邮箱</div>
+              <!-- 占位防止高度丢失 -->
+              <div class="error" v-show="!errors.account"></div>
+            </div>
+            <div class="password">
+              <span>密&nbsp;&nbsp;&nbsp;码:</span>
+              <input
+                class="input"
+                type="password"
+                placeholder="请输入密码"
+                v-model="passwordValue"
+              />
+              <div class="error">{{ errors.password }}</div>
+            </div>
           </div>
-          <div class="password">
-            <span>密&nbsp;&nbsp;&nbsp;码:</span>
-            <input class="input" type="password" placeholder="请输入密码" />
+          <div class="login-btn">
+            <button>登陆</button>
           </div>
-        </div>
-        <div class="login-btn">
-          <button>登陆</button>
-        </div>
+        </form>
         <div class="info">
           <a href="javascript:;">注册账户</a>
           <a href="javascript:;">忘记密码?</a>
@@ -30,8 +41,43 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import validate from '@/plugins/validate';
+import { getLogin } from '@/api/userApi';
+import localStore from '@/utils/localStore';
+// 集中定义各表单规则
+// 各表单错误信息集合  处理函数
+const { errors, handleSubmit } = validate.useForm({
+  // 设置初始值
+  initialValues: {
+    account: '13456@4869',
+    password: '44657892'
+  },
+  // 设置验证字段
+  validationSchema: {
+    account: { required: true, min: 7, regex: /(.+@.+)|\d{11}/i },
+    password: { required: true, min: 7 }
+  }
+});
+// 解构出来并取别名，value是表单的值                input的name
+const { value: accountValue } = validate.useField('account', {}, { label: '*账号' });
+const { value: passwordValue } = validate.useField('password', {}, { label: '*密码' });
+// 表单提交时触发,当通过handleSubmit函数的验证时，才触发里面的回调函数，没有handleSubmit的话，提交表单时不会触发验证，直接调用验证成功函数
+const onSubmit = handleSubmit(async (values: { account: string; password: string }) => {
+  // 发送请求获取token
+  const {
+    data: { token }
+  } = await getLogin(values); // 解构获取token
+  localStore.set('token', { token, expire: 5 });
+  setTimeout(() => {
+    localStore.get('token');
+    alert('ok');
+  }, 6000);
+  // localStorage.setItem('token', token);
 
+  alert('success');
+});
+</script>
 <style scoped lang="scss">
 .container {
   position: absolute;
@@ -112,7 +158,7 @@ input {
 }
 
 .username {
-  margin-bottom: 60px;
+  margin-bottom: 38px;
 }
 
 .password {

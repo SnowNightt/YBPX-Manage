@@ -1,20 +1,18 @@
 // test.ts
-
-import { MockMethod } from "vite-plugin-mock";
+import { MockMethod } from 'vite-plugin-mock';
 export default [
   {
-    url: "/api/user",
-    method: "get",
+    url: '/api/login',
+    method: 'post',
     response: () => {
       return {
         code: 200,
-        message:'cg',
-        type:'success',
+        message: '',
+        type: 'success',
         data: {
-          name: "vben",
-        },
+          token: 'slakghoadslnre'
+        }
       };
-    },
-  },
+    }
+  }
 ] as MockMethod[];
-

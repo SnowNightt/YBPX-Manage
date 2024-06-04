@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-import { env } from '@/types/helper';
+import { env } from '@/utils/env';
 // 定义一个接口描述 Vue 单文件组件的结构
 interface VueComponent {
   default: {
