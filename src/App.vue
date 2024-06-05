@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 
 <template>
-  <ybInput />
+  <!-- <ybInput /> -->
   <router-view></router-view>
 </template>

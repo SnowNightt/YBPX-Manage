@@ -45,6 +45,8 @@
 import validate from '@/plugins/validate';
 import { getLogin } from '@/api/userApi';
 import localStore from '@/utils/localStore';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 // 集中定义各表单规则
 // 各表单错误信息集合  处理函数
 const { errors, handleSubmit } = validate.useForm({
@@ -68,14 +70,15 @@ const onSubmit = handleSubmit(async (values: { account: string; password: string
   const {
     data: { token }
   } = await getLogin(values); // 解构获取token
-  localStore.set('token', { token, expire: 5 });
-  setTimeout(() => {
-    localStore.get('token');
-    alert('ok');
-  }, 6000);
-  // localStorage.setItem('token', token);
-
-  alert('success');
+  localStore.set('token', { token });
+  // 登录成功跳转到首页
+  router.push({ name: 'home' });
+});
+</script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+export default defineComponent({
+  route: { name: 'login', meta: { guest: true } }
 });
 </script>
 <style scoped lang="scss">

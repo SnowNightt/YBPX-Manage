@@ -15,16 +15,6 @@
 </template>
 
 <script setup lang="ts">
-// import { defineRule, configure, useField, useForm } from 'vee-validate';
-// import { required, email } from '@vee-validate/rules';
-// import { localize } from '@vee-validate/i18n';
-// import zh_CN from '@vee-validate/i18n/dist/locale/zh_CN.json';
-// import * as yup from 'yup';
-// defineRule('email', email);
-// defineRule('required', required);
-// configure({
-//   generateMessage: localize('zh_CN', zh_CN)
-// });
 import validate from '@/plugins/validate';
 //       处理函数      各表单错误信息集合
 const { handleSubmit, errors } = validate.useForm({
