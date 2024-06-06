@@ -7,8 +7,17 @@ import 'vue-router';
 export {};
 
 declare module 'vue-router' {
+  interface IMenu {
+    // 路由在菜单是否显示
+    isShow?: boolean;
+    // 菜单标题
+    title: string;
+    // 菜单字体图标
+    icon?: string;
+  }
   interface RouteMeta {
     auth?: boolean;
     guest?: boolean;
+    menu: IMenu;
   }
 }

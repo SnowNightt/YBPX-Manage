@@ -1,7 +1,7 @@
 import _ from 'lodash';
 // 设置环境变量中值的类型，不然都是string类型
 class helper {
-  public env: Record<string, unknown>;
+  public env: ImportMetaEnv;
   constructor() {
     this.env = this.getEnv();
   }

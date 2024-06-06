@@ -7,22 +7,31 @@
     </div>
     <!-- 菜单 -->
     <div class="menu-list mt-5">
-      <dl class="menu-item mt-5 px-4" v-for="(item, index) of menu" :key="index">
-        <dt
-          @click="handleMenu(item)"
-          class="item-title text-xl text-[#e9ecef] pl-6 flex justify-between"
-          >{{ item.title }} <i class="fas fa-angle-down text-sm"></i
-        ></dt>
-        <dd
-          class="item-content"
-          @click="handleMenu(item, it)"
-          :class="{ active: it.active }"
-          v-show="item.active"
-          v-for="(it, index) of item.children"
-          :key="index"
-          >{{ it.title }}</dd
-        >
-      </dl>
+      <div>
+        <dl class="menu-item mt-5 px-4" v-for="(item, index) of menu" :key="index">
+          <dt
+            @click="handleMenu(item)"
+            class="item-title text-xl text-[#e9ecef] pl-6 flex justify-between"
+            >{{ item.title }}
+            <i
+              class="fas fa-angle-down text-sm duration-500 origin-center flex items-center"
+              :class="{ 'rotate-180': item.active }"
+            ></i
+          ></dt>
+          <transition name="menu">
+            <div v-if="item.active">
+              <dd
+                class="item-content"
+                @click="handleMenu(item, it)"
+                :class="{ active: it.active }"
+                v-for="(it, index) of item.children"
+                :key="index"
+                >{{ it.title }}</dd
+              >
+            </div>
+          </transition>
+        </dl>
+      </div>
     </div>
   </div>
 </template>
@@ -59,9 +68,17 @@ const resetMenu = () => {
 };
 // 处理菜单点击事件
 const handleMenu = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
-  resetMenu();
-  pmenu.active = true;
+  //   resetMenu();
+  //   点击的是一级菜单且当前一级菜单是打开状态
+
+  if (!cmenu && pmenu.active) {
+    pmenu.active = false;
+  } else {
+    pmenu.active = true;
+  }
   if (cmenu) {
+    resetMenu();
+    pmenu.active = true;
     cmenu.active = true;
   }
 };
@@ -74,6 +91,19 @@ const handleMenu = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
 </script>
 
 <style scoped lang="scss">
+.menu-enter-active,
+.menu-leave-active {
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+}
+
+.menu-enter,
+.menu-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
 .menu {
   .logo {
     .logo-img {
