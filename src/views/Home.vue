@@ -2,7 +2,7 @@
   <div class="home-container w-screen h-screen bg-[#f3d9fa]">
     <div class="push-btn">
       <router-link
-        :to="{ name: 'admin-user' }"
+        :to="{ name: 'admin.user' }"
         class="w-full h-full flex items-center justify-center"
         >进入</router-link
       >

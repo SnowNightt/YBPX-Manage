@@ -51,7 +51,10 @@
 <script setup lang="ts">
 import { nextTick, ref } from 'vue';
 import { echarts1, echarts2 } from './echarts';
+import useRouterStore from '@/store/router';
 import * as echarts from 'echarts';
+const routerStore = useRouterStore();
+
 interface ICardData {
   title: string;
   titleTag: string;

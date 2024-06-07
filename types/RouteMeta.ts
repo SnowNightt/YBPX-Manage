@@ -14,10 +14,13 @@ declare module 'vue-router' {
     title: string;
     // 菜单字体图标
     icon?: string;
+    isClick?: boolean;
   }
   interface RouteMeta {
     auth?: boolean;
     guest?: boolean;
-    menu: IMenu;
+    menu?: IMenu;
+    // 访问权限
+    permissions?: string[];
   }
 }

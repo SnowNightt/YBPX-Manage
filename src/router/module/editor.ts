@@ -5,6 +5,13 @@ const routes = [
     name: 'editor',
     path: '/editor',
     component: () => import('@/layouts/Editor.vue'),
+    meta: {
+      menu: {
+        title: '编译器',
+        isShow: true,
+        icon: 'fab fa-apple'
+      }
+    },
     children: [
       {
         name: 'editor.base',
@@ -13,7 +20,7 @@ const routes = [
         meta: {
           menu: {
             title: '基础编译器',
-            isShow: true,
+            isShow: false,
             icon: 'fab fa-apple'
           }
         }

@@ -5,6 +5,7 @@ const routes = [
     name: 'admin',
     path: '/admin',
     component: () => import('@/layouts/Admin.vue'),
+    meta: { menu: { title: '用户首页', isShow: true, icon: 'fab fa-cloudsmith' } },
     children: [
       {
         name: 'admin.user',
