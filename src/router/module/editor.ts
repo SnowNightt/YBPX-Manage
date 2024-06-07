@@ -4,13 +4,14 @@ const routes = [
   {
     name: 'editor',
     path: '/editor',
-    component: () => import('@/layouts/Editor.vue'),
+    component: () => import('@/layouts/Admin.vue'),
     meta: {
       menu: {
         title: '编译器',
         isShow: true,
         icon: 'fab fa-apple'
-      }
+      },
+      auth: true
     },
     children: [
       {

@@ -6,11 +6,11 @@
     </el-breadcrumb>
     <div class="avatar flex items-center relative cursor-pointer group">
       <img
-        src="../../../public/img/5.png"
+        :src="userStore.info?.avatar"
         alt="网络问题"
         class="w-[40px] h-[40px] rounded-full object-cover mr-2"
       />
-      <span class="text-sm text-gray-600">夜半飘雪</span>
+      <span class="text-sm text-gray-600">{{ userStore.info?.name }}</span>
       <section
         class="group-hover:block group-ho down-bar absolute top-[56px] left-[-25px] bg-[#dee2e6] w-24 rounded-sm p-2 hidden"
       >
@@ -28,4 +28,7 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import useUserStore from '@/store/user';
+const userStore = useUserStore();
+</script>

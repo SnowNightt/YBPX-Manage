@@ -1,5 +1,8 @@
 import { http } from '@/plugins/axios';
-
+export interface IUserInfo {
+  name: string;
+  avatar: string;
+}
 interface LoginToken {
   token: string;
 }
@@ -14,4 +17,10 @@ async function getLogin(data: LoginData) {
     data
   });
 }
-export { getLogin };
+async function getUserInfo() {
+  return http.request<IUserInfo>({
+    url: '/user/info',
+    method: 'get'
+  });
+}
+export { getLogin, getUserInfo };

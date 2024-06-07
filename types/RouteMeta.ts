@@ -17,7 +17,9 @@ declare module 'vue-router' {
     isClick?: boolean;
   }
   interface RouteMeta {
+    // 是否需要登录访问
     auth?: boolean;
+    // 是否可以游客访问
     guest?: boolean;
     menu?: IMenu;
     // 访问权限

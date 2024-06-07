@@ -1,11 +1,13 @@
 import { RouteLocationNormalized, Router } from 'vue-router';
 import localStore from '@/utils/localStore';
+import user from '@/store/user';
 class Guard {
   constructor(private router: Router) {
     this.router = router;
   }
   public run() {
-    this.router.beforeEach((to, from) => {
+    this.router.beforeEach(async (to, from) => {
+      await user().getInfo();
       // 获取token
       const token = localStore.get('token');
       // 验证是否登录
@@ -15,7 +17,8 @@ class Guard {
       }
       //  判断是不是游客,不是游客则不能进登录页面
       if (this.isGuest(to, token?.token) == false) {
-        return from.path;
+        console.log(from, to);
+        return from;
       }
     });
   }

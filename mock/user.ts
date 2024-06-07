@@ -14,5 +14,20 @@ export default [
         }
       };
     }
+  },
+  {
+    url: '/api/user/info',
+    method: 'get',
+    response: () => {
+      return {
+        code: 200,
+        message: '',
+        type: 'success',
+        data: {
+          name: 'ybpx',
+          avatar: '../../../public/img/5.png'
+        }
+      };
+    }
   }
 ] as MockMethod[];

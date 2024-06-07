@@ -37,29 +37,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import useRouterStore from '@/store/router';
-import { IMenu, RouteRecordNormalized, RouteRecordRaw } from 'vue-router';
-// interface IMenuItem {
-//   title: string;
-//   active?: boolean;
-// }
-// interface IMenu extends IMenuItem {
-//   children?: IMenuItem[];
-// }
-// const menu = ref<IMenu[]>([
-//   {
-//     title: '菜单一',
-//     active: true,
-//     children: [{ title: '选项1', active: true }, { title: '选项1' }, { title: '选项1' }]
-//   },
-//   {
-//     title: '菜单二',
-//     active: false,
-//     children: [{ title: '选项2' }, { title: '选项2' }, { title: '选项2' }]
-//   }
-// ]);
+import { IMenu, RouteRecordNormalized, RouteRecordRaw, useRouter } from 'vue-router';
 const routerStore = useRouterStore();
+const router = useRouter();
 // 重置菜单
 const resetMenu = () => {
   routerStore.routes.forEach((item) => {
@@ -83,14 +64,9 @@ const handleMenu = (pmenu: RouteRecordNormalized, cmenu?: RouteRecordRaw) => {
     resetMenu();
     (pmenu.meta.menu as IMenu).isClick = true;
     (cmenu.meta?.menu as IMenu).isClick = true;
+    router.push({ name: cmenu.name });
   }
 };
-// 处理子菜单点击事件
-// const handleItem = (item: IMenuItem, pitem: IMenuItem) => {
-//   resetMenu();
-//   pitem.active = true;
-//   item.active = true;
-// };
 </script>
 
 <style scoped lang="scss">

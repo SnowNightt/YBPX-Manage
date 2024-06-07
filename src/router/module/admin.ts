@@ -5,6 +5,8 @@ const routes = [
     name: 'admin',
     path: '/admin',
     component: () => import('@/layouts/Admin.vue'),
+    // 重定向
+    redirect: '/admin/user',
     meta: { menu: { title: '用户首页', isShow: true, icon: 'fab fa-cloudsmith' } },
     children: [
       {
@@ -12,6 +14,7 @@ const routes = [
         path: 'user',
         component: () => import('@/views/admin/User.vue'),
         meta: {
+          auth: true,
           menu: {
             title: '主页',
             isShow: true,
