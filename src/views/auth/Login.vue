@@ -43,10 +43,8 @@
 
 <script setup lang="ts">
 import validate from '@/plugins/validate';
-import { getLogin } from '@/api/userApi';
-import localStore from '@/utils/localStore';
-import { useRouter } from 'vue-router';
-const router = useRouter();
+import { ILoginData } from '@/api/userApi';
+import { login } from '@/utils/user';
 // 集中定义各表单规则
 // 各表单错误信息集合  处理函数
 const { errors, handleSubmit } = validate.useForm({
@@ -65,14 +63,9 @@ const { errors, handleSubmit } = validate.useForm({
 const { value: accountValue } = validate.useField('account', {}, { label: '*账号' });
 const { value: passwordValue } = validate.useField('password', {}, { label: '*密码' });
 // 表单提交时触发,当通过handleSubmit函数的验证时，才触发里面的回调函数，没有handleSubmit的话，提交表单时不会触发验证，直接调用验证成功函数
-const onSubmit = handleSubmit(async (values: { account: string; password: string }) => {
-  // 发送请求获取token
-  const {
-    data: { token }
-  } = await getLogin(values); // 解构获取token
-  localStore.set('token', { token });
-  // 登录成功跳转到首页
-  router.push({ name: 'home' });
+const onSubmit = handleSubmit(async (values: ILoginData) => {
+  // 用户登录
+  await login(values);
 });
 </script>
 <script lang="ts">

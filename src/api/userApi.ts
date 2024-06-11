@@ -6,11 +6,11 @@ export interface IUserInfo {
 interface LoginToken {
   token: string;
 }
-interface LoginData {
+export interface ILoginData {
   account: string;
   password: string;
 }
-async function getLogin(data: LoginData) {
+async function getLogin(data: ILoginData) {
   return http.request<LoginToken>({
     url: '/login',
     method: 'post',

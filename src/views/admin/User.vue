@@ -1,11 +1,12 @@
 <template>
-  <div class="user px-4">
-    <div class="cards grid grid-flow-col gap-2">
+  <div class="user md:px-4 w-screen md:w-full">
+    <div class="cards mt-4 md:mt-0 grid md:grid-flow-col gap-2 px-2 md:px-0">
       <el-card
         shadow="always"
         :body-style="{ padding: '20px' }"
         v-for="(item, index) in data"
         :key="index"
+        class="mt-4 md:mt-0"
       >
         <template #header>
           <div class="flex justify-between">
@@ -27,14 +28,16 @@
       </el-card>
     </div>
 
-    <div class="echarts grid grid-cols-2 gap-2 mt-[50px]">
-      <el-card shadow="always" :body-style="{ padding: '20px' }">
+    <div class="echarts grid md:grid-cols-2 gap-2 mt-[45px] px-2 md:px-0">
+      <el-card shadow="always" :body-style="{ padding: '20px' }" class="">
         <template #header>
           <div>
             <span class="font-bold text-lg">用户统计</span>
           </div>
         </template>
-        <div id="echarts1" class="h-[400px] w-full"></div>
+        <div class="flex justify-center">
+          <div id="echarts1" class="h-[300px] md:w-[350px] w-full"></div>
+        </div>
       </el-card>
       <el-card shadow="always" :body-style="{ padding: '20px' }">
         <template #header>
@@ -42,7 +45,9 @@
             <span class="font-bold text-lg">用户活跃度</span>
           </div>
         </template>
-        <div id="echarts2" class="h-[400px] w-full"></div>
+        <div class="flex justify-center">
+          <div id="echarts2" class="h-[300px] md:w-[350px] w-full"></div>
+        </div>
       </el-card>
     </div>
   </div>
@@ -51,9 +56,7 @@
 <script setup lang="ts">
 import { nextTick, ref } from 'vue';
 import { echarts1, echarts2 } from './echarts';
-import useRouterStore from '@/store/router';
 import * as echarts from 'echarts';
-const routerStore = useRouterStore();
 
 interface ICardData {
   title: string;

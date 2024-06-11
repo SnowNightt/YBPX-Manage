@@ -14,7 +14,6 @@ export function setupPlugins(app: App<Element>) {
   for (const key of keys) {
     let componentName = key.split('/').at(-1)?.split('.')[0];
     componentName = _.camelCase(componentName);
-    console.log(modules, key, modules[key]);
     app.component(componentName, modules[key] || {});
   }
 }

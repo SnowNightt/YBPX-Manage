@@ -11,6 +11,11 @@ const routes: RouteRecordRaw[] = [
     name: 'login',
     component: () => import('@/views/auth/Login.vue'),
     meta: { guest: true }
+  },
+  {
+    path: '/:any(.*)',
+    name: '404',
+    component: () => import('@/views/errors/404.vue')
   }
 ];
 export default routes;

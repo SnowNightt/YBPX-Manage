@@ -21,7 +21,7 @@ const routes = [
         meta: {
           menu: {
             title: '基础编译器',
-            isShow: false,
+            isShow: true,
             icon: 'fab fa-apple'
           }
         }
@@ -32,7 +32,7 @@ const routes = [
         component: () => import('@/views/editor/MarkDown.vue'),
         meta: {
           menu: {
-            title: '基础编译器',
+            title: 'MarkDown',
             isShow: true,
             icon: 'fab fa-atlassian'
           }

@@ -9,6 +9,7 @@ const router = createRouter({
   routes: [...routes, ...autoloadRoutes]
 });
 guard(router);
+export { router };
 export function setupRouter(app: App) {
   app.use(router);
 }
