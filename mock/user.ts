@@ -25,7 +25,8 @@ export default [
         type: 'success',
         data: {
           name: 'ybpx',
-          avatar: '../../../public/img/5.png'
+          avatar: '../../../public/img/5.png',
+          permissions: ['markdown_editor']
         }
       };
     }

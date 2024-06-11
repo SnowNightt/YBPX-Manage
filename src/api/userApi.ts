@@ -2,6 +2,7 @@ import { http } from '@/plugins/axios';
 export interface IUserInfo {
   name: string;
   avatar: string;
+  permissions?: string[];
 }
 interface LoginToken {
   token: string;

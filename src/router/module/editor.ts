@@ -19,6 +19,7 @@ const routes = [
         path: 'base',
         component: () => import('@/views/editor/Base.vue'),
         meta: {
+          permissions: ['base_editor'],
           menu: {
             title: '基础编译器',
             isShow: true,
@@ -31,6 +32,7 @@ const routes = [
         path: 'markdown',
         component: () => import('@/views/editor/MarkDown.vue'),
         meta: {
+          permissions: ['markdown_editor'],
           menu: {
             title: 'MarkDown',
             isShow: true,

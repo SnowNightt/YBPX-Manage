@@ -119,7 +119,7 @@ const handleMenu = (pmenu: RouteRecordNormalized, cmenu?: RouteRecordRaw) => {
     .menu-list {
       .menu-item {
         .item-content {
-          @apply h-[40px] leading-[40px] pl-10 text-base text-[#e9ecef] mt-2 hover:bg-[#4dabf7] cursor-pointer duration-300 rounded-md;
+          @apply h-[40px] w-[130px] leading-[40px] ml-6 pl-3 text-base text-[#e9ecef] mt-2 hover:bg-[#4dabf7] cursor-pointer duration-300 rounded-md;
 
           &.active {
             @apply bg-[#339af0];
@@ -154,10 +154,16 @@ const handleMenu = (pmenu: RouteRecordNormalized, cmenu?: RouteRecordRaw) => {
             top: 0;
             left: 100%;
             display: block !important;
-            width: 150px;
+            width: 190px;
+            padding: 2px 10px 10px;
             padding-left: 20px !important;
             background-color: #495057;
-            border: 1px solid #000;
+            border-radius: 10px;
+
+            .item-content {
+              box-sizing: border-box;
+              margin: 8px auto 0 !important;
+            }
 
             .menu-text {
               display: inline;

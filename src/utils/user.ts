@@ -1,11 +1,10 @@
 import { CacheEnum } from '@/enum/cacheEnum';
 import localStore from './localStore';
 import user from '@/store/userStore';
-import { router } from '@/router';
+import router from '@/router';
 import { ILoginData, getLogin } from '@/api/userApi';
 // 用户退出登录，删除token
 function logout(key: CacheEnum.TOKEN_NAME) {
-  console.log(router);
   localStore.remove(key);
   user().info = null;
   router.push('/');

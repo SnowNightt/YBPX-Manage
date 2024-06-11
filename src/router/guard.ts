@@ -19,7 +19,6 @@ class Guard {
       }
       //  判断是不是游客,不是游客则不能进登录页面
       if (this.isGuest(to, token?.token) == false) {
-        console.log(from, to);
         return from;
       }
       // 获取面包屑

@@ -4,9 +4,9 @@ import setupElementPlus from './element-plus';
 import setupPinia from './pinia';
 import _ from 'lodash';
 export function setupPlugins(app: App<Element>) {
+  setupPinia(app);
   setupTailwind();
   setupElementPlus(app);
-  setupPinia(app);
 
   // ../components/form/*.vue目录下的组件自动注册为全局组件
   const modules = import.meta.glob('../components/form/*.vue', { eager: true, import: 'default' });

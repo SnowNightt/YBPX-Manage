@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
 import { IHistoreMenu } from 'types/HistoryMenu';
 import { ref } from 'vue';
+import router from '@/router';
 import { RouteLocationNormalizedLoaded, RouteMeta, RouteRecordRaw, useRouter } from 'vue-router';
 
 const useMenuStore = defineStore('menu', () => {
-  const router = useRouter();
   const routes = getRoutes();
   const historyMenu = ref<IHistoreMenu[]>([]);
   // 菜单是否展开
@@ -33,10 +33,25 @@ const useMenuStore = defineStore('menu', () => {
     }
     sessionStorage.setItem('history_route_name', JSON.stringify(historyMenu.value));
   }
-  // 从本地获取面包屑
+  // 从本地获取面包屑,根据权限过滤
   function getHistoryMenu() {
-    historyMenu.value = JSON.parse(sessionStorage.getItem('history_route_name')!) ?? [];
+    let historyLink: IHistoreMenu[] =
+      JSON.parse(sessionStorage.getItem('history_route_name')!) ?? [];
+    const routes = [] as RouteRecordRaw[];
+    router.getRoutes().forEach((route) => {
+      routes.push(...route.children);
+    });
+
+    historyMenu.value = historyLink.filter((item) => {
+      return routes.some((route) => route.name == item.routeName);
+    });
+
+    // return historyLink;
   }
+
+  // function getHistoryMenu() {
+  //   historyMenu.value = JSON.parse(sessionStorage.getItem('history_route_name')!) ?? [];
+  // }
   // 删除面包屑
   function removeHistoryMenu(menu: IHistoreMenu, route: RouteLocationNormalizedLoaded) {
     const index = historyMenu.value.indexOf(menu);
