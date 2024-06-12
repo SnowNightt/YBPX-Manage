@@ -7,6 +7,7 @@ class helper {
   }
   private getEnv(): ImportMetaEnv {
     const envs: ImportMetaEnv = _.cloneDeep(import.meta.env);
+
     Object.entries(envs).forEach(([key, value]) => {
       if (value == 'true' || value == 'false') {
         envs[key] = value == 'true';

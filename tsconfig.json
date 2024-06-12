@@ -7,7 +7,10 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@public/*": ["public/*"],
+      // 防止引入@wangeditor/editor-for-vue 造成ts类型报错
+      "@wangeditor/editor-for-vue": ["node_modules/@wangeditor/editor-for-vue/dist/src/index.d.ts"]
     },
     "allowSyntheticDefaultImports": true,
 

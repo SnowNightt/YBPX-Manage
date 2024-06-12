@@ -38,6 +38,8 @@
   "dependencies": {
     "@vee-validate/i18n": "4.5.10",
     "@vee-validate/rules": "4.5.10",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "axios": "^1.6.8",
     "echarts": "^5.5.0",
     "element-plus": "^2.7.4",
