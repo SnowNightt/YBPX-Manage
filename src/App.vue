@@ -2,5 +2,7 @@
 
 <template>
   <!-- <ybInput /> -->
-  <router-view></router-view>
+  <Suspense>
+    <router-view></router-view>
+  </Suspense>
 </template>

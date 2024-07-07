@@ -16,6 +16,11 @@ const routes: RouteRecordRaw[] = [
     path: '/:any(.*)',
     name: '404',
     component: () => import('@/views/errors/404.vue')
+  },
+  {
+    path: '/articles',
+    name: 'articles',
+    component: () => import('@/views/Articles.vue')
   }
 ];
 export default routes;

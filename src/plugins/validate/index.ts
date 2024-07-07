@@ -18,9 +18,15 @@ validate.configure({
 Object.keys(rules).forEach((rule) => {
   validate.defineRule(rule, rules[rule]);
 });
-
+// 统一生成字段
+const useFields = (fields: string[], rules = {}, config: object) => {
+  fields.forEach((field) => {
+    validate.useField(field, rules, config);
+  });
+};
 const module = {
   yup,
-  ...validate
+  ...validate,
+  useFields
 };
 export default module;

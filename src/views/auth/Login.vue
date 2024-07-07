@@ -12,7 +12,12 @@
           <div class="user-input">
             <div class="username">
               <span>用户名:</span>
-              <input class="input" type="text" placeholder="请输入用户名" v-model="accountValue" />
+              <input
+                class="input"
+                type="text"
+                placeholder="请输入用户名"
+                v-model="values.account"
+              />
               <div class="error" v-show="errors.account">*请输入手机号或邮箱</div>
               <!-- 占位防止高度丢失 -->
               <div class="error" v-show="!errors.account"></div>
@@ -23,7 +28,7 @@
                 class="input"
                 type="password"
                 placeholder="请输入密码"
-                v-model="passwordValue"
+                v-model="values.password"
               />
               <div class="error">{{ errors.password }}</div>
             </div>
@@ -45,23 +50,26 @@
 import validate from '@/plugins/validate';
 import { ILoginData } from '@/api/userApi';
 import { login } from '@/utils/user';
+// 验证规则
+const schema = {
+  account: { required: true, min: 7, regex: /(.+@.+)|\d{11}/i },
+  password: { required: true, min: 7 }
+};
 // 集中定义各表单规则
-// 各表单错误信息集合  处理函数
-const { errors, handleSubmit } = validate.useForm({
+// 各表单错误信息集合  处理函数   各表单值的集合
+const { errors, handleSubmit, values } = validate.useForm({
   // 设置初始值
   initialValues: {
     account: '13456@4869',
     password: '44657892'
   },
   // 设置验证字段
-  validationSchema: {
-    account: { required: true, min: 7, regex: /(.+@.+)|\d{11}/i },
-    password: { required: true, min: 7 }
-  }
+  validationSchema: schema
 });
 // 解构出来并取别名，value是表单的值                input的name
-const { value: accountValue } = validate.useField('account', {}, { label: '*账号' });
-const { value: passwordValue } = validate.useField('password', {}, { label: '*密码' });
+validate.useField('account', {}, { label: '*账号' });
+validate.useField('password', {}, { label: '*密码' });
+// validate.useFields(Object.keys(schema),{},);
 // 表单提交时触发,当通过handleSubmit函数的验证时，才触发里面的回调函数，没有handleSubmit的话，提交表单时不会触发验证，直接调用验证成功函数
 const onSubmit = handleSubmit(async (values: ILoginData) => {
   // 用户登录

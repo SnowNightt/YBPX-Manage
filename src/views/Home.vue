@@ -11,12 +11,7 @@
 </template>
 
 <script setup lang="ts"></script>
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-  route: { name: 'home' }
-});
-</script>
+
 <style scoped lang="scss">
 .push-btn {
   @apply w-72 h-14 text-lg font-bold text-white/90 bg-gradient-to-r from-[#ce9ffc] to-[#8b68f7] border-none rounded-2xl;

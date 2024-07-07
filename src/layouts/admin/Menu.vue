@@ -18,19 +18,19 @@
               <span class="ml-5">个人首页</span>
             </dt>
           </dl>
-          <dl class="menu-item mt-5 px-1" v-for="(item, index) of menu.menus.value" :key="index">
-            <dt
-              @click="handleMenu(item)"
-              class="item-title text-xl text-[#e9ecef] pl-4 flex items-center justify-between cursor-pointer h-[28px]"
-            >
-              <i class="fas fa-bars text-sm"></i>
-              <span>{{ item.meta.menu?.title }}</span>
-              <i
-                class="down-arrow fas fa-angle-down text-sm duration-500 origin-center flex items-center"
-                :class="{ 'rotate-180': item.meta.menu?.isClick }"
-              ></i
-            ></dt>
-            <transition name="menu">
+          <TransitionGroup name="list">
+            <dl class="menu-item mt-5 px-1" v-for="(item, index) of menu.menus.value" :key="index">
+              <dt
+                @click="handleMenu(item)"
+                class="item-title text-xl text-[#e9ecef] pl-4 flex items-center justify-between cursor-pointer h-[28px]"
+              >
+                <i class="fas fa-bars text-sm"></i>
+                <span>{{ item.meta.menu?.title }}</span>
+                <i
+                  class="down-arrow fas fa-angle-down text-sm duration-500 origin-center flex items-center"
+                  :class="{ 'rotate-180': item.meta.menu?.isClick }"
+                ></i
+              ></dt>
               <dd v-show="item.meta.menu?.isClick && !menuStore.isClose">
                 <div
                   class="item-content"
@@ -43,8 +43,8 @@
                   <span class="menu-text">{{ it.meta?.menu?.title }}</span></div
                 >
               </dd>
-            </transition>
-          </dl>
+            </dl>
+          </TransitionGroup>
         </div>
       </div>
     </div>
@@ -63,19 +63,8 @@ const menu = new MenuSerive(router);
 const menuStore = useMenuStore();
 // 监听路由变化，设置子菜单点击状态
 watch(route, () => menu.setCurrentMenu(route), { immediate: true });
-
-// 重置菜单
-// const resetMenu = () => {
-//   menuStore.routes.forEach((item) => {
-//     (item.meta.menu as IMenu).isClick = false;
-//     item.children?.forEach((it) => {
-//       (it.meta?.menu as IMenu).isClick = false;
-//     });
-//   });
-// };
 // 处理菜单点击事件
 const handleMenu = (pmenu: RouteRecordNormalized, cmenu?: RouteRecordRaw) => {
-  //   resetMenu();
   //   点击的是一级菜单且当前一级菜单是打开状态
   if (!cmenu && pmenu.meta.menu?.isClick) {
     pmenu.meta.menu.isClick = false;
@@ -84,9 +73,6 @@ const handleMenu = (pmenu: RouteRecordNormalized, cmenu?: RouteRecordRaw) => {
   }
   // 点击的是子菜单
   if (cmenu) {
-    // resetMenu();
-    // (pmenu.meta.menu as IMenu).isClick = true;
-    // (cmenu.meta?.menu as IMenu).isClick = true;
     router.push({ name: cmenu.name as string });
     // 添加面包屑
     menuStore.addHistoryMenu(cmenu);
@@ -95,17 +81,14 @@ const handleMenu = (pmenu: RouteRecordNormalized, cmenu?: RouteRecordRaw) => {
 </script>
 
 <style scoped lang="scss">
-.menu-enter-active,
-.menu-leave-active {
-  transition:
-    opacity 0.3s,
-    transform 0.3s;
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.15s linear;
 }
 
-.menu-enter,
-.menu-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
+.list-leave-active {
+  position: absolute;
 }
 
 .admin-menu {
@@ -153,6 +136,7 @@ const handleMenu = (pmenu: RouteRecordNormalized, cmenu?: RouteRecordRaw) => {
             position: absolute;
             top: 0;
             left: 100%;
+            z-index: 999;
             display: block !important;
             width: 190px;
             padding: 2px 10px 10px;

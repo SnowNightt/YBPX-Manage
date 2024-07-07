@@ -21,7 +21,7 @@ import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { onBeforeUnmount, ref, shallowRef, watch } from 'vue';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 import { IDomEditor } from '@wangeditor/editor';
-import { env } from '@/utils/env';
+import { ApiEnum } from '@/enum/apiEnum';
 interface Iprops {
   modelValue?: string;
   placeholder?: string;
@@ -51,7 +51,7 @@ const editorConfig = {
     // 上传图片的配置
     uploadImage: {
       // 服务端地址（发送请求的接口）
-      server: env.VITE_UPLOAD_IMAGE_SERVE,
+      server: ApiEnum.UPLOAD_IMAGE_URL,
       // form-data fieldName ，默认值 'wangeditor-uploaded-image'
       fieldName: 'img',
       // 单个文件的最大体积限制，默认为 2M
@@ -79,7 +79,7 @@ const editorConfig = {
 // 编辑器内容、选区变化时的回调函数。
 const changeValue = () => {
   // 父子组件数据同步
-  emit('update:modelValue', (editorRef.value as IDomEditor).getHtml());
+  emit('update:modelValue', valueHtml.value);
 };
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {

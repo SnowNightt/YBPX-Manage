@@ -5,8 +5,10 @@ const useUserStore = defineStore('user', () => {
   // 用户信息
   const info = ref<null | IUserInfo>();
   const getInfo = async () => {
-    const { data } = await getUserInfo();
-    info.value = data;
+    if (localStorage.getItem('token')) {
+      const { data } = await getUserInfo();
+      info.value = data;
+    }
   };
   return {
     info,
